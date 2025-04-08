@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
 import { Cliente } from '../../modelo/cliente.modelo';
 import { ClienteService } from '../../servicios/cliente.service';
 import { CommonModule } from '@angular/common';
@@ -23,6 +23,8 @@ export class ClientesComponent {
     email: '',
     saldo: undefined
   };
+
+  @ViewChild('botonCerrar') botonCerrar!: ElementRef;
 
   constructor(private ClienteServicio: ClienteService){}
 
@@ -51,8 +53,18 @@ export class ClientesComponent {
   agregar(clienteForm: NgForm) {
     const {value, valid} = clienteForm;
     if(valid){
+      // Logica para agregar cliente
+      console.log(value);
+      
+      this.ClienteServicio.agregarCliente(value);
 
       clienteForm.resetForm();
+      this.cerrarModal();
     }
   }
+  
+  private cerrarModal(){
+    this.botonCerrar.nativeElement.click();
+  }
+
 }
