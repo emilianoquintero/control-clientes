@@ -24,8 +24,10 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>Name</th>
-                                <th>Amount</th>
-                                <th></th>
+                                <th>Second Name</th>
+                                <th>Email</th>
+                                <th>Phone number</th>
+                                <th>Age</th>
                             </tr>
                         </thead>
                         <!-- <tbody>
@@ -43,11 +45,14 @@
                             }
                         </tbody> -->
                         <tbody>
-                            <tr *ngFor="let cliente of clientes">
-                              <td>{{cliente.nombre}} {{cliente.apellido}}</td>
-                              <td>{{cliente.saldo | currency: 'MXN':'$'}}</td>
+                            <tr *ngFor="let client of clients">
+                              <td>{{client.firstName}}</td>
+                              <td>{{client.secondName}}</td>
+                              <td>{{client.email}}</td>
+                              <td>{{client.phoneNumber}}</td>
+                              <td>{{client.age}}</td>
                               <td>
-                                <a [routerLink]="'/cliente/editar/' + cliente.id"
+                                <a [routerLink]="'/cliente/editar/' + client.id"
                                 class="btn btn-secondary">
                                 <i class="bi bi-pencil-square"></i> Edit
                                 </a>
@@ -59,20 +64,20 @@
             </div>
             <!-- Tarjetas laterales -->
             <div class="col-md-3">
-                <div class="card text-center bg-danger text-white mb-3">
+                <!-- <div class="card text-center bg-danger text-white mb-3">
                     <div class="card-body">
                         <h3>Total Debt</h3>
-                        <h4 class="display-4">
-                            {{getSaldoTotal() | currency: 'MXN':'$'}}
-                        </h4>
+                        <h4 class="display-4"> -->
+                            <!-- {{getSaldoTotal() | currency: 'MXN':'$'}} -->
+                        <!-- </h4>
                     </div>
-                </div>
+                </div> -->
                 <!-- Segunda tarjeta -->
                  <div class="card text-center bg-success text-white mb-3">
                     <div class="card-body">
                         <h3>Total Clients</h3>
                         <h4 class="display-4">
-                            <i class="bi bi-people-fill"></i> {{clientes?.length}}
+                            <i class="bi bi-people-fill"></i> {{clients?.length}}
                         </h4>
                     </div>
                  </div>
@@ -102,11 +107,11 @@
                             Name
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" id="nombre" name="nombre" class="form-control" required
-                            minlength="2" [(ngModel)]="cliente.nombre" #nombre="ngModel"/>
-                            @if(nombre.invalid && nombre.touched) {
+                            <input type="text" id="firstName" name="firstName" class="form-control" required
+                            minlength="2" [(ngModel)]="client.firstName" #firstName="ngModel"/>
+                            @if(firstName.invalid && firstName.touched) {
                                 <div class="text-danger">
-                                    Name is required
+                                    firstName is required
                                 </div>
                             }
                         </div>
@@ -117,9 +122,9 @@
                             Last Name
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" id="apellido" name="apellido" class="form-control" required
-                            minlength="2" [(ngModel)]="cliente.apellido" #apellido="ngModel"/>
-                            @if(apellido.invalid && apellido.touched) {
+                            <input type="text" id="secondName" name="secondName" class="form-control" required
+                            minlength="2" [(ngModel)]="client.secondName" #secondName="ngModel"/>
+                            @if(secondName.invalid && secondName.touched) {
                                 <div class="text-danger">
                                     Last Name is required
                                 </div>
@@ -133,7 +138,7 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="email" id="email" name="email" class="form-control" required
-                            [(ngModel)]="cliente.email" #email="ngModel"/>
+                            [(ngModel)]="client.email" #email="ngModel"/>
                             @if(email.invalid && email.touched) {
                                 <div class="text-danger">
                                     Invalid Email
@@ -144,18 +149,32 @@
                     <!-- campo saldo -->
                     <div class="d-flex align-item-center mb-3">
                         <label for="nombre" class="form-label me-3 col-sm-1" style="min-wdth: 100px">
-                            Amount
+                            Phone Number
                         </label>
                         <div class="col-sm-9">
-                            <input type="number" id="saldo" name="saldo" class="form-control" required
-                            min='0.01' step='0.01' [(ngModel)]="cliente.saldo" #saldo="ngModel"/>
-                            @if(saldo.invalid && saldo.touched) {
+                            <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" required
+                            min='0.01' step='0.01' [(ngModel)]="client.phoneNumber" #phoneNumber="ngModel"/>
+                            @if(phoneNumber.invalid && phoneNumber.touched) {
                                 <div class="text-danger">
-                                    Positive amount is required
+                                    PhoneNumber is required
                                 </div>
                             }
                         </div>
-                        
+                    </div>
+                    <!-- campo saldo -->
+                    <div class="d-flex align-item-center mb-3">
+                        <label for="nombre" class="form-label me-3 col-sm-1" style="min-wdth: 100px">
+                            Age
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="number" id="age" name="age" class="form-control" required
+                            min='0.01' step='0.01' [(ngModel)]="client.age" #age="ngModel"/>
+                            @if(age.invalid && age.touched) {
+                                <div class="text-danger">
+                                    PhoneNumber is required. Can't be negative
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
                 <!-- footer con boton de guardar -->

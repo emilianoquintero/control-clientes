@@ -30,14 +30,14 @@
                     <!-- campo nombre -->
                     <div class="d-flex align-item-center mb-3">
                         <label for="nombre" class="form-label me-3 col-sm-1" style="min-wdth: 100px">
-                            Nombre
+                            First Name
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" id="nombre" name="nombre" class="form-control" required
-                            minlength="2" [(ngModel)]="cliente.nombre" #nombre="ngModel"/>
-                            @if(nombre.invalid && nombre.touched) {
+                            <input type="text" id="firstName" name="firstName" class="form-control" required
+                            minlength="2" [(ngModel)]="client.firstName" #firstName="ngModel"/>
+                            @if(firstName.invalid && firstName.touched) {
                                 <div class="text-danger">
-                                    Nombre requerido y debe tener al menos 2 caracteres
+                                    This field is required & Have to be min 2 character long
                                 </div>
                             }
                         </div>
@@ -48,11 +48,11 @@
                             Apellido
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" id="apellido" name="apellido" class="form-control" required
-                            minlength="2" [(ngModel)]="cliente.apellido" #apellido="ngModel"/>
-                            @if(apellido.invalid && apellido.touched) {
+                            <input type="text" id="secondName" name="secondName" class="form-control" required
+                            minlength="2" [(ngModel)]="client.secondName" #secondName="ngModel"/>
+                            @if(secondName.invalid && secondName.touched) {
                                 <div class="text-danger">
-                                    Apellido requerido y debe tener al menos 2 caracteres
+                                    This field is required & Have to be min 2 character long
                                 </div>
                             }
                         </div>
@@ -64,25 +64,40 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="email" id="email" name="email" class="form-control" required
-                            [(ngModel)]="cliente.email" #email="ngModel"/>
+                            [(ngModel)]="client.email" #email="ngModel"/>
                             @if(email.invalid && email.touched) {
                                 <div class="text-danger">
-                                    Ingresa un Email valido
+                                    This field is required & Have to be min 2 character long
                                 </div>
                             }
                         </div>
                     </div>
-                    <!-- campo saldo -->
+                    <!-- campo age -->
                     <div class="d-flex align-item-center mb-3">
-                        <label for="nombre" class="form-label me-3 col-sm-1" style="min-wdth: 100px">
-                            Saldo
+                        <label for="email" class="form-label me-3 col-sm-1" style="min-wdth: 100px">
+                            Phone Number
                         </label>
                         <div class="col-sm-9">
-                            <input type="number" id="saldo" name="saldo" class="form-control" required
-                            min='0.01' step='0.01' [(ngModel)]="cliente.saldo" #saldo="ngModel"/>
-                            @if(saldo.invalid && saldo.touched) {
+                            <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" required
+                            [(ngModel)]="client.phoneNumber" #phoneNumber="ngModel"/>
+                            @if(phoneNumber.invalid && phoneNumber.touched) {
                                 <div class="text-danger">
-                                    El saldo es necesario y debe ser un numero positivo
+                                    This field is required & Have to be min 2 character long
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- campo age -->
+                    <div class="d-flex align-item-center mb-3">
+                        <label for="email" class="form-label me-3 col-sm-1" style="min-wdth: 100px">
+                            Age
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="number" id="age" name="age" class="form-control" required
+                            [(ngModel)]="client.age" #age="ngModel"/>
+                            @if(age.invalid && age.touched) {
+                                <div class="text-danger">
+                                    This field is required & Have to be min 2 character long
                                 </div>
                             }
                         </div>

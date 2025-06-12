@@ -4,6 +4,8 @@ import { ClienteService } from '../../servicios/cliente.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ClientService } from '../../servicios/client.service';
+import { Client } from '../../modelo/client.model';
 
 @Component({
   selector: 'app-clientes',
@@ -21,16 +23,29 @@ export class ClientesComponent {
     nombre: '',
     apellido: '',
     email: '',
-    saldo: undefined
+    saldo: undefined,
   };
+
+  clients: Client[] | null = null;
+  client: Client = {
+    firstName: '',
+    secondName: '',
+    email: '',
+    phoneNumber: undefined,
+    age: undefined
+  }
+
 
   @ViewChild('botonCerrar') botonCerrar!: ElementRef;
 
-  constructor(private ClienteServicio: ClienteService){}
+  constructor(
+    private ClienteServicio: ClienteService,
+    private ClientService: ClientService
+  ){}
 
   ngOnInit(){
-    this.ClienteServicio.getClientes().subscribe(clientes => {
-      this.clientes = clientes;
+    this.ClientService.findAll().subscribe(clients => {
+      this.clients = clients;
     });
   }
 
@@ -46,18 +61,20 @@ export class ClientesComponent {
   //   return saldoTotal;
   // }
 
-  getSaldoTotal(): number {
-    return this.clientes?.reduce((total, cliente) => total + (cliente.saldo ?? 0), 0) ?? 0;
-  }
+  // getSaldoTotal(): number {
+  //   return this.clientes?.reduce((total, cliente) => total + (cliente.saldo ?? 0), 0) ?? 0;
+  // }
 
   agregar(clienteForm: NgForm) {
     const {value, valid} = clienteForm;
     if(valid){
       // Logica para agregar cliente
-      console.log(value);
-      
-      this.ClienteServicio.agregarCliente(value);
-
+      this.ClientService.createClient(value).subscribe(resp => {
+        console.log('Respuesta del servidor:', resp);
+            this.ClientService.findAll().subscribe(clients => {
+              this.clients = clients;
+            });
+      });
       clienteForm.resetForm();
       this.cerrarModal();
     }
